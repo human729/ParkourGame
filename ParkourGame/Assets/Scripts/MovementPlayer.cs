@@ -22,7 +22,8 @@ public class MovementPlayer : MonoBehaviour
     
     void Update()
     {
-        transform.position += Quaternion.Euler(0,Camera.main.transform.eulerAngles.y,0) * new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, Input.GetAxis("Vertical") * speed * Time.deltaTime);
+        transform.position += Quaternion.Euler(0,Camera.main.transform.eulerAngles.y,0) * new Vector3(0, 0, Input.GetAxis("Vertical") * speed * Time.deltaTime);
+        transform.position += new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && numberOfJumps < MaxJumps)
         {
