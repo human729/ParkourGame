@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    public ThirdPersonCam Cam;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,7 +30,11 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        transform.position += (Orientation.forward * verticalInput + Orientation.right * horizontalInput).normalized * MoveSpeed * 10f * Time.deltaTime;
+
+        //Vector3 InputVector = new Vector3 (horizontalInput,0,verticalInput);
+        
+        //Vector3 moveDirection = new Vector3 (transform.forward.x, rb.velocity.y, transform.forward.z);
+        rb.velocity = Cam.inputDir.normalized * MoveSpeed;
         
     }
 

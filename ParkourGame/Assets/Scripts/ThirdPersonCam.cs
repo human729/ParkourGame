@@ -9,7 +9,7 @@ public class ThirdPersonCam : MonoBehaviour
     public Transform Player;
     public Transform PlayerObj;
     public Rigidbody Rb;
-
+    public Vector3 inputDir;
     public float RotationSpeed;
     void Start()
     {
@@ -24,7 +24,7 @@ public class ThirdPersonCam : MonoBehaviour
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDir = Orientation.forward * verticalInput+ Orientation.right * horizontalInput;
+        inputDir = Orientation.forward * verticalInput+ Orientation.right * horizontalInput;
 
         if (inputDir != Vector3.zero)
         {

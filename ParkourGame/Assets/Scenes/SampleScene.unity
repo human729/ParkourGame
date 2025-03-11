@@ -1486,6 +1486,7 @@ MonoBehaviour:
   Player: {fileID: 1239141855}
   PlayerObj: {fileID: 845187779}
   Rb: {fileID: 1239141856}
+  inputDir: {x: 0, y: 0, z: 0}
   RotationSpeed: 7
 --- !u!65 &1239141858
 BoxCollider:
@@ -1522,6 +1523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 3
   Orientation: {fileID: 968366410}
+  Cam: {fileID: 1239141857}
 --- !u!1 &1251324534
 GameObject:
   m_ObjectHideFlags: 0
