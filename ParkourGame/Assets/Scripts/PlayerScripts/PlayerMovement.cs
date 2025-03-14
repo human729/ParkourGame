@@ -14,12 +14,12 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
     float turnSmoothVelocity;
     Vector3 PlayerVelocity;
-    CharacterController controller;
+    public CharacterController controller;
     public float GravityValue;
     public float JumpHeight;
-    Vector3 moveDir;
-    public float DashTime;
-    public float DashDistance;
+    public Vector3 moveDir;
+    //public float DashTime;
+    //public float DashDistance;
     private bool isMoving;
     Animator PlayerAnimator;
     float AnimFloat;
@@ -128,17 +128,19 @@ public class PlayerMovement : MonoBehaviour
         bool GroundetPlayer = controller.isGrounded;
 
         Vector3 InputVector = new Vector3 (horizontalInput,0,verticalInput).normalized;
-        if (MathF.Round(AnimFloat, 4) != 0.0001f)
-        {
-            AnimFloat = Mathf.Lerp(AnimFloat, 0, 0.015f);
-        }
-        PlayerAnimator.SetFloat("move", AnimFloat);
+        //if (MathF.Round(AnimFloat, 4) != 0.0001f)
+        //{
+        //    AnimFloat = Mathf.Lerp(AnimFloat, 0, 0.015f);
+        //}
+        //PlayerAnimator.SetFloat("move", AnimFloat);
         
         if (InputVector.magnitude >= 0.1f)
         {
             if (!isSpeedIncreased && MoveSpeed == StartSpeed)
             {
                 isSpeedIncreased = true;
+                AnimFloat = 1;
+                PlayerAnimator.SetFloat("move", AnimFloat);
                 StartCoroutine(Sprint(InputVector));
             }
 
@@ -150,21 +152,21 @@ public class PlayerMovement : MonoBehaviour
 
             controller.Move(moveDir.normalized * MoveSpeed * Time.deltaTime);
 
-            if (MoveSpeed > 8f && MoveSpeed < 20f)
-            {
-                AnimFloat = 0.67f;
-                PlayerAnimator.SetFloat("move", AnimFloat);
-            }
-            if (MoveSpeed <= 8f)
-            {
-                AnimFloat = Mathf.Lerp(AnimFloat, 0.2880295f, 1.1f);
-                PlayerAnimator.SetFloat("move", AnimFloat);
-            }
-            if (MoveSpeed <= MaxSpeed && MoveSpeed >= 20f)
-            {
-                AnimFloat = Mathf.Lerp(AnimFloat, 1, 1.1f);
-                PlayerAnimator.SetFloat("move", AnimFloat);
-            }
+            //if (MoveSpeed > 8f && MoveSpeed < 20f)
+            //{
+            //    AnimFloat = 0.67f;
+            //    PlayerAnimator.SetFloat("move", AnimFloat);
+            //}
+            //if (MoveSpeed <= 8f)
+            //{
+            //AnimFloat = Mathf.Lerp(AnimFloat, 1, 0.2f);
+            //PlayerAnimator.SetFloat("move", AnimFloat);
+            //}
+            //if (MoveSpeed <= MaxSpeed && MoveSpeed >= 20f)
+            //{
+            //    AnimFloat = Mathf.Lerp(AnimFloat, 1, 1.1f);
+            //    PlayerAnimator.SetFloat("move", AnimFloat);
+            //}
         }
 
         if (InputVector.magnitude < 0.1f)
@@ -172,19 +174,16 @@ public class PlayerMovement : MonoBehaviour
             StopAllCoroutines();
             MoveSpeed = StartSpeed;
             isSpeedIncreased = false;
+                AnimFloat = 0;
+                PlayerAnimator.SetFloat("move", AnimFloat);
+            
         }
         
 
-        print(GroundetPlayer);
 
         DoubleJump(ref doneJumps);
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-
-            StartCoroutine(Dash());
-            
-        }
+       
         if (!GroundetPlayer)
         {
             PlayerAnimator.SetBool("isFalling", true);
@@ -197,9 +196,9 @@ public class PlayerMovement : MonoBehaviour
         }
         PlayerVelocity.y += GravityValue * Time.deltaTime;
         controller.Move(PlayerVelocity * Time.deltaTime);
-        
 
 
+        print(AnimFloat);
     }
 
     private void DoubleJump(ref int numberOfJumps)
@@ -213,23 +212,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator Dash()
-    {
-        float startTime = Time.time;
-        while (startTime + DashTime > Time.time)
-        {
-            controller.Move(moveDir * Time.deltaTime * DashDistance);
-            yield return null;
-        }
-    }
+   
 
     IEnumerator Sprint(Vector3 InputVector)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 2; i++)
         {
-            if (MoveSpeed == MaxSpeed || InputVector.magnitude < 0.1f) yield break;
-            yield return new WaitForSeconds(1.2f);
-            MoveSpeed += 2;
+            if (MoveSpeed == MaxSpeed || InputVector.magnitude < 0.1f) 
+            {
+                yield break;
+            } 
+            yield return new WaitForSeconds(2f);
+            MoveSpeed += 4;
+            AnimFloat = i+2;
+            PlayerAnimator.SetFloat("move", AnimFloat);
             print("AddingSpeed");
         }
     }
