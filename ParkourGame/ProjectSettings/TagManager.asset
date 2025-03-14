@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - SpeedBoost
+  - BoostManager
+  - JumpBoost
+  - WalkableWall
   layers:
   - Default
   - TransparentFX

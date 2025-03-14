@@ -16,17 +16,20 @@ public class PlayerMovement : MonoBehaviour
     Vector3 PlayerVelocity;
     public CharacterController controller;
     public float GravityValue;
+    private bool GroundedPlayer;
     public float JumpHeight;
     public Vector3 moveDir;
+    public Quaternion rotation;
     //public float DashTime;
     //public float DashDistance;
     private bool isMoving;
     Animator PlayerAnimator;
     float AnimFloat;
     float FallingY;
+    private bool isWalkableWall;
     float StartSpeed;
     bool isSpeedIncreased;
-    private const float MaxSpeed = 24f;
+    private float MaxSpeed = 24f;
     [Header("Jumps")]
     public int maxJumps;
     private int doneJumps;
@@ -125,15 +128,10 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        bool GroundetPlayer = controller.isGrounded;
+        GroundedPlayer = controller.isGrounded;
 
         Vector3 InputVector = new Vector3 (horizontalInput,0,verticalInput).normalized;
-        //if (MathF.Round(AnimFloat, 4) != 0.0001f)
-        //{
-        //    AnimFloat = Mathf.Lerp(AnimFloat, 0, 0.015f);
-        //}
-        //PlayerAnimator.SetFloat("move", AnimFloat);
-        
+
         if (InputVector.magnitude >= 0.1f)
         {
             if (!isSpeedIncreased && MoveSpeed == StartSpeed)
@@ -169,6 +167,12 @@ public class PlayerMovement : MonoBehaviour
             //}
         }
 
+        if (isWalkableWall)
+        {
+            GravityValue = 0;
+            transform.rotation = rotation;
+        }
+
         if (InputVector.magnitude < 0.1f)
         {
             StopAllCoroutines();
@@ -184,12 +188,12 @@ public class PlayerMovement : MonoBehaviour
         DoubleJump(ref doneJumps);
 
        
-        if (!GroundetPlayer)
+        if (!GroundedPlayer)
         {
             PlayerAnimator.SetBool("isFalling", true);
             PlayerAnimator.SetBool("hasJumped", false);
         }
-        if (GroundetPlayer)
+        if (GroundedPlayer)
         {
             doneJumps = 0;
             PlayerAnimator.SetBool("isFalling", false);
@@ -199,6 +203,17 @@ public class PlayerMovement : MonoBehaviour
 
 
         print(AnimFloat);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // always null collision - Timur fix plz
+        if (collision.gameObject.CompareTag("WalkableWall"))
+        {
+            print("found walkable wall");
+            isWalkableWall = true;
+            rotation = collision.transform.rotation;
+        }
     }
 
     private void DoubleJump(ref int numberOfJumps)
