@@ -32,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private float MaxSpeed = 24f;
     [Header("Jumps")]
     public int maxJumps;
-    private int doneJumps;
+    private int doneJumps = 0;
+    private bool isJumped;
 
     //public CharacterMovement characterMovement = new CharacterMovement(new Staying());
 
@@ -167,12 +168,6 @@ public class PlayerMovement : MonoBehaviour
             //}
         }
 
-        if (isWalkableWall)
-        {
-            GravityValue = 0;
-            transform.rotation = rotation;
-        }
-
         if (InputVector.magnitude < 0.1f)
         {
             StopAllCoroutines();
@@ -185,45 +180,54 @@ public class PlayerMovement : MonoBehaviour
         
 
 
-        DoubleJump(ref doneJumps);
+        
 
        
-        if (!GroundedPlayer)
+        if (!GroundetPlayer)
         {
             PlayerAnimator.SetBool("isFalling", true);
             PlayerAnimator.SetBool("hasJumped", false);
+            if (!PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoubleJump"))
+            {
+                PlayerAnimator.SetBool("DoubleJump", false);
+            }
         }
-        if (GroundedPlayer)
+        if (GroundetPlayer && PlayerVelocity.y <= 0f)
         {
             doneJumps = 0;
             PlayerAnimator.SetBool("isFalling", false);
+            PlayerAnimator.SetBool("DoubleJump", false);
+            print("ground");
         }
         PlayerVelocity.y += GravityValue * Time.deltaTime;
         controller.Move(PlayerVelocity * Time.deltaTime);
 
-
-        print(AnimFloat);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // always null collision - Timur fix plz
-        if (collision.gameObject.CompareTag("WalkableWall"))
-        {
-            print("found walkable wall");
-            isWalkableWall = true;
-            rotation = collision.transform.rotation;
-        }
+        DoubleJump(ref doneJumps);
+        //print(AnimFloat);
     }
 
     private void DoubleJump(ref int numberOfJumps)
     {
         if (Input.GetKeyDown(KeyCode.Space) && numberOfJumps < maxJumps - 1)
-        {
+        {   
+            print("Jumping");
             PlayerVelocity.y = Mathf.Sqrt(JumpHeight * -2 * GravityValue);
-            PlayerAnimator.SetBool("hasJumped", true);
-            FallingY = PlayerVelocity.y;
-            ++numberOfJumps;
+            if (numberOfJumps > 0)
+            {
+                PlayerAnimator.SetBool("DoubleJump", true);
+                //FallingY = PlayerVelocity.y;
+                print(numberOfJumps);
+                ++numberOfJumps;
+                //PlayerAnimator.SetBool("DoneJumping", true);
+                
+            } else if (numberOfJumps <= 0 )
+            {
+                PlayerAnimator.SetBool("hasJumped", true);
+                FallingY = PlayerVelocity.y;
+                print(numberOfJumps);
+                ++numberOfJumps;
+            }
+            
         }
     }
 
@@ -244,4 +248,6 @@ public class PlayerMovement : MonoBehaviour
             print("AddingSpeed");
         }
     }
+
+
 }
