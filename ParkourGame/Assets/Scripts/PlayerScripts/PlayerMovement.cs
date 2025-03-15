@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         
 
        
-        if (!GroundetPlayer)
+        if (!GroundedPlayer)
         {
             PlayerAnimator.SetBool("isFalling", true);
             PlayerAnimator.SetBool("hasJumped", false);
@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
                 PlayerAnimator.SetBool("DoubleJump", false);
             }
         }
-        if (GroundetPlayer && PlayerVelocity.y <= 0f)
+        if (GroundedPlayer && PlayerVelocity.y <= 0f)
         {
             doneJumps = 0;
             PlayerAnimator.SetBool("isFalling", false);
