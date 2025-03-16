@@ -13,26 +13,21 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
     float turnSmoothVelocity;
-    Vector3 PlayerVelocity;
+    public Vector3 PlayerVelocity;
     public CharacterController controller;
     public float GravityValue;
-    private bool GroundedPlayer;
-    public float JumpHeight;
+    public bool GroundedPlayer;
     public Vector3 moveDir;
     public Quaternion rotation;
     //public float DashTime;
     //public float DashDistance;
-    private bool isMoving;
     Animator PlayerAnimator;
     float AnimFloat;
-    float FallingY;
     private bool isWalkableWall;
     float StartSpeed;
     bool isSpeedIncreased;
     private float MaxSpeed = 24f;
-    [Header("Jumps")]
-    public int maxJumps;
-    private int doneJumps;
+   
 
     //public CharacterMovement characterMovement = new CharacterMovement(new Staying());
 
@@ -167,11 +162,7 @@ public class PlayerMovement : MonoBehaviour
             //}
         }
 
-        if (isWalkableWall)
-        {
-            GravityValue = 0;
-            transform.rotation = rotation;
-        }
+        
 
         if (InputVector.magnitude < 0.1f)
         {
@@ -185,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
         
 
 
-        DoubleJump(ref doneJumps);
+        
 
        
         if (!GroundedPlayer)
@@ -195,9 +186,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if (GroundedPlayer)
         {
-            doneJumps = 0;
             PlayerAnimator.SetBool("isFalling", false);
         }
+
+
         PlayerVelocity.y += GravityValue * Time.deltaTime;
         controller.Move(PlayerVelocity * Time.deltaTime);
 
@@ -205,29 +197,7 @@ public class PlayerMovement : MonoBehaviour
         print(AnimFloat);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        // always null collision - Timur fix plz
-        if (collision.gameObject.CompareTag("WalkableWall"))
-        {
-            print("found walkable wall");
-            isWalkableWall = true;
-            rotation = collision.transform.rotation;
-        }
-    }
 
-    private void DoubleJump(ref int numberOfJumps)
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && numberOfJumps < maxJumps - 1)
-        {
-            PlayerVelocity.y = Mathf.Sqrt(JumpHeight * -2 * GravityValue);
-            PlayerAnimator.SetBool("hasJumped", true);
-            FallingY = PlayerVelocity.y;
-            ++numberOfJumps;
-        }
-    }
-
-   
 
     IEnumerator Sprint(Vector3 InputVector)
     {

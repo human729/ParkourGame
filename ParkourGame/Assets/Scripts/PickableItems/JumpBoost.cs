@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class JumpBoost : MonoBehaviour, Boost
 {
-    PlayerMovement playerMovement;
+    Jump playerJump;
     private float boostJump = 6f;
 
     private void Start()
     {
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        playerJump = GameObject.FindGameObjectWithTag("Player").GetComponent<Jump>();
     }
 
     public void AddBoost()
     {
-        playerMovement.JumpHeight += boostJump;
+        playerJump.JumpHeight += boostJump;
     }
 
     public void Picked(GameObject pickableItem)
@@ -30,6 +30,6 @@ public class JumpBoost : MonoBehaviour, Boost
     private IEnumerator WaitTime()
     {
         yield return new WaitForSeconds(5);
-        playerMovement.JumpHeight -= boostJump;
+        playerJump.JumpHeight -= boostJump;
     }
 }
