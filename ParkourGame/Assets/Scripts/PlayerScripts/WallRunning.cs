@@ -8,11 +8,13 @@ public class WallRunning : MonoBehaviour
     public LayerMask WallToRun;
     private CharacterController controller;
     private float turnSmoothVelocity;
+    Animator PlayerAnimator;
 
     void Start()
     {
         Movement = GetComponent<PlayerMovement>();
         controller = GetComponent<CharacterController>();
+        PlayerAnimator = transform.GetChild(0).GetComponent<Animator>();
     }
 
 
@@ -20,24 +22,24 @@ public class WallRunning : MonoBehaviour
     {
         Vector3 WallInput = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1f, WallToRun))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 0.6f, WallToRun))
         {
             Movement.GravityValue = 0;           
-            WallRunInput(WallInput);
+            WallRunInput(WallInput,1);
         }
-        else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1f, WallToRun))
+        else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 0.6f, WallToRun))
         {
             Movement.GravityValue = 0;            
-            WallRunInput(WallInput);
+            WallRunInput(WallInput,0);
         }
         else
         {
             EnableGravity();
-            print("sdsd");
+            //print("sdsd");
         }
     }
 
-    private void WallRunInput(Vector3 WallInput)
+    private void WallRunInput(Vector3 WallInput, int WallPosition)
     {
         print(WallInput);
         if (WallInput.magnitude >= 0.1f)
@@ -54,6 +56,14 @@ public class WallRunning : MonoBehaviour
             if (WallInput.z > 0)
             {
                 transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+                if (WallPosition == 1)
+                {
+                    PlayerAnimator.SetBool("WallRunRight", true);
+                }
+                if (WallPosition == 0)
+                {
+                    PlayerAnimator.SetBool("WallRunLeft", true);
+                }
             }
 
             if (WallInput.z < 0)
@@ -71,5 +81,7 @@ public class WallRunning : MonoBehaviour
     {
         Movement.enabled = true;
         Movement.GravityValue = -15;
+        PlayerAnimator.SetBool("WallRunLeft", false);
+        PlayerAnimator.SetBool("WallRunRight", false);
     }
 }

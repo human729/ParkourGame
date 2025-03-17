@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 137114815}
   - component: {fileID: 137114814}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: PlayerSpeedUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 479427434}
   - component: {fileID: 479427433}
   m_Layer: 5
-  m_Name: Text (Legacy) (2)
+  m_Name: JumpCountUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 660151491}
   - component: {fileID: 660151490}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: DashCountUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -725,8 +725,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -325, y: 58}
-  m_SizeDelta: {x: 72.99805, y: 73.64868}
+  m_AnchoredPosition: {x: -325, y: 58.606415}
+  m_SizeDelta: {x: 152.1636, y: 63.8091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &660151490
 MonoBehaviour:
@@ -1262,7 +1262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858116849}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38779214, y: 0.13257296, z: -0.05646967, w: 0.91041356}
+  m_LocalRotation: {x: 0.38779604, y: 0.13251019, z: -0.056442924, w: 0.91042274}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1282,6 +1282,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194232}
+  - component: {fileID: 963194233}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1397,6 +1398,23 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &963194233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4be95387da9983488d0b92fbde8d799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementScript: {fileID: 1239141859}
+  dash: {fileID: 1239141862}
+  PlayerSpeedText: {fileID: 137114814}
+  PlayerDashCount: {fileID: 660151490}
+  PlayerJumpCount: {fileID: 479427433}
 --- !u!1 &994883568
 GameObject:
   m_ObjectHideFlags: 3
@@ -1783,6 +1801,7 @@ MonoBehaviour:
   GroundedPlayer: 0
   moveDir: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 0}
+  SpeedToShow: 0
 --- !u!143 &1239141860
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1822,7 +1841,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DashTime: 0.2
+  DashCount: 2
   DashDistance: 20
+  DashReturn: 0
 --- !u!114 &1239141863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1862,7 +1883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491c089cb711d1e4f8323f9e8b1daf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumps: 2
+  maxJumps: 4
   JumpHeight: 3
 --- !u!1 &1251324534
 GameObject:
@@ -2010,7 +2031,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367172175}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.37266302, y: 0.13348989, z: -0.054266594, w: 0.9167104}
+  m_LocalRotation: {x: 0.37266678, y: 0.13342667, z: -0.05424089, w: 0.91671956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2734,7 +2755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118048747}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38779214, y: 0.13257296, z: -0.05646967, w: 0.91041356}
+  m_LocalRotation: {x: 0.38779604, y: 0.13251019, z: -0.056442924, w: 0.91042274}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

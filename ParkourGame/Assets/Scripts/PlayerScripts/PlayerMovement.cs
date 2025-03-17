@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     float StartSpeed;
     bool isSpeedIncreased;
     private float MaxSpeed = 24f;
+    public float SpeedToShow = 0f;
    
 
     //public CharacterMovement characterMovement = new CharacterMovement(new Staying());
@@ -144,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
             moveDir = Quaternion.Euler(0, angle, 0) * new Vector3(0, 0, 1);
 
             controller.Move(moveDir.normalized * MoveSpeed * Time.deltaTime);
-
+            
             //if (MoveSpeed > 8f && MoveSpeed < 20f)
             //{
             //    AnimFloat = 0.67f;
@@ -169,9 +170,9 @@ public class PlayerMovement : MonoBehaviour
             StopAllCoroutines();
             MoveSpeed = StartSpeed;
             isSpeedIncreased = false;
-                AnimFloat = 0;
-                PlayerAnimator.SetFloat("move", AnimFloat);
-            
+            AnimFloat = 0;
+            PlayerAnimator.SetFloat("move", AnimFloat);
+            SpeedToShow = 0;
         }
         
 
@@ -182,9 +183,9 @@ public class PlayerMovement : MonoBehaviour
         if (!GroundedPlayer)
         {
             PlayerAnimator.SetBool("isFalling", true);
-            PlayerAnimator.SetBool("hasJumped", false);
+            print(GroundedPlayer+ " hjkhj");
         }
-        if (GroundedPlayer)
+        if (GroundedPlayer || PlayerVelocity.y > 0)
         {
             PlayerAnimator.SetBool("isFalling", false);
         }
@@ -194,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(PlayerVelocity * Time.deltaTime);
 
 
-        print(AnimFloat);
+        //print(AnimFloat);
     }
 
 
@@ -209,6 +210,7 @@ public class PlayerMovement : MonoBehaviour
             } 
             yield return new WaitForSeconds(2f);
             MoveSpeed += 4;
+            SpeedToShow += 40;
             AnimFloat = i+2;
             PlayerAnimator.SetFloat("move", AnimFloat);
             print("AddingSpeed");
