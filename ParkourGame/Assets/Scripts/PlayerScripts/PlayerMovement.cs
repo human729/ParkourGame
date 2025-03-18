@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     bool isSpeedIncreased;
     private float MaxSpeed = 24f;
     public float SpeedToShow = 0f;
-   
+
 
     //public CharacterMovement characterMovement = new CharacterMovement(new Staying());
 
@@ -183,7 +183,6 @@ public class PlayerMovement : MonoBehaviour
         if (!GroundedPlayer)
         {
             PlayerAnimator.SetBool("isFalling", true);
-            print(GroundedPlayer+ " hjkhj");
         }
         if (GroundedPlayer || PlayerVelocity.y > 0)
         {

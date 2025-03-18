@@ -3,33 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Dash : MonoBehaviour
 {
     PlayerMovement Movement;
     public float DashTime;
     public int DashCount;
+    public int MaxDashCount;
     public float DashDistance;
     public bool DashReturn;
+
+    private void Awake()
+    {
+        DashCount = MaxDashCount;
+    }
     void Start()
     {
         Movement = GetComponent<PlayerMovement>();
+        StartCoroutine(GetDash());
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && DashCount <= 2 && DashCount > 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && DashCount <= MaxDashCount && DashCount > 0)
         {
-            DashReturn = false;
+            //DashReturn = false;
             StartCoroutine(Dashing());
-            StopCoroutine(GetDash());
-            --DashCount;
-        }
-
-        if (DashCount < 2 && !DashReturn)
-        {
-            StartCoroutine(GetDash());
         }
     }
 
@@ -41,15 +43,27 @@ public class Dash : MonoBehaviour
             Movement.controller.Move(Movement.moveDir * Time.deltaTime * DashDistance);
             yield return null;
         }
+        --DashCount;
     }
 
     private IEnumerator GetDash()
     {
-        DashReturn = true;
-        for (int i = 0; i < 10; i++)
+
+        //for (int i = DashCount; i < MaxDashCount; ++i)
+        //{
+        while (true)
         {
-            yield return new WaitForSeconds(1f);
+            if (DashCount < MaxDashCount)
+            {
+                yield return new WaitForSeconds(5f);
+                ++DashCount;
+            } else
+            {
+                yield return null;
+            }
         }
-        ++DashCount;
     }
+
+    //}
 }
+

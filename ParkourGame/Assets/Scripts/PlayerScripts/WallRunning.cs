@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class WallRunning : MonoBehaviour
@@ -9,6 +11,11 @@ public class WallRunning : MonoBehaviour
     private CharacterController controller;
     private float turnSmoothVelocity;
     Animator PlayerAnimator;
+    Vector3 JumpDirection;
+    Jump Jumping;
+    bool activeWallRun;
+    bool leftWall, rightWall;
+    RaycastHit HitRight, HitLeft;
 
     void Start()
     {
@@ -21,15 +28,17 @@ public class WallRunning : MonoBehaviour
     void Update()
     {
         Vector3 WallInput = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized;
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 0.6f, WallToRun))
+        rightWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out HitRight, 0.6f, WallToRun);
+        leftWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out HitLeft, 0.6f, WallToRun);
+        if (rightWall || leftWall) activeWallRun = true;
+        if (rightWall && activeWallRun)
         {
-            Movement.GravityValue = 0;           
+            Movement.GravityValue = 0;
             WallRunInput(WallInput,1);
         }
-        else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 0.6f, WallToRun))
+        else if (leftWall && activeWallRun)
         {
-            Movement.GravityValue = 0;            
+            Movement.GravityValue = 0;
             WallRunInput(WallInput,0);
         }
         else
@@ -41,7 +50,6 @@ public class WallRunning : MonoBehaviour
 
     private void WallRunInput(Vector3 WallInput, int WallPosition)
     {
-        print(WallInput);
         if (WallInput.magnitude >= 0.1f)
         {
             Movement.enabled = false;
@@ -55,6 +63,12 @@ public class WallRunning : MonoBehaviour
 
             if (WallInput.z > 0)
             {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    EnableGravity();
+                    WallJump();
+                    return;
+                }
                 transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
                 if (WallPosition == 1)
                 {
@@ -66,7 +80,7 @@ public class WallRunning : MonoBehaviour
                 }
             }
 
-            if (WallInput.z < 0)
+            if (WallInput.z < 0 || !activeWallRun)
             {
                 EnableGravity();
             }
@@ -77,6 +91,14 @@ public class WallRunning : MonoBehaviour
         }
     }
 
+    private void WallJump()
+    {
+        Vector3 JumpDirectionSide = rightWall ? Vector3.right : Vector3.left;
+        Vector3 JumpDirection = transform.up * Jumping.JumpHeight + JumpDirectionSide * 7f;
+        controller.Move(JumpDirection.normalized);
+        activeWallRun = false;
+    }
+    
     private void EnableGravity()
     {
         Movement.enabled = true;

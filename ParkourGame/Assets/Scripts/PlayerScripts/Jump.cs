@@ -6,7 +6,7 @@ public class Jump : MonoBehaviour
 {
     [Header("Jumps")]
     public int maxJumps;
-    private int doneJumps = 0;
+    public int doneJumps = 0;
     public float JumpHeight;
     PlayerMovement Movement;
     Animation DoubleJumpAnim;
@@ -41,7 +41,6 @@ public class Jump : MonoBehaviour
             PlayerAnimator.SetBool("DoubleJump", false);
             PlayerAnimator.SetBool("hasJumped", false);
         }
-        print (doneJumps);
     }
 
     private void DoubleJump(ref int numberOfJumps)
@@ -64,7 +63,6 @@ public class Jump : MonoBehaviour
                     PlayerAnimator.Play("DoubleJump",0,0.2f);
                 }
                 ++numberOfJumps;
-                //print (numberOfJumps);
             } 
         }
     }
