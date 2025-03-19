@@ -9,6 +9,9 @@ TagManager:
   - BoostManager
   - JumpBoost
   - WalkableWall
+  - FxTemporaire
+  - PowerUp
+  - JumpObstacle
   layers:
   - Default
   - TransparentFX

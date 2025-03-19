@@ -13,6 +13,8 @@ public class Dash : MonoBehaviour
     public int MaxDashCount;
     public float DashDistance;
     public bool DashReturn;
+    SkinnedMeshRenderer SkinnedMeshRenderer;
+    ParticleSystem ParticleSystem;
 
     private void Awake()
     {
@@ -20,9 +22,10 @@ public class Dash : MonoBehaviour
     }
     void Start()
     {
+        ParticleSystem = transform.GetChild(1).GetComponent<ParticleSystem>();
+        SkinnedMeshRenderer = transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>();
         Movement = GetComponent<PlayerMovement>();
         StartCoroutine(GetDash());
-
     }
 
     // Update is called once per frame
@@ -37,13 +40,17 @@ public class Dash : MonoBehaviour
 
     IEnumerator Dashing()
     {
+        SkinnedMeshRenderer.enabled = false;
         float startTime = Time.time;
         while (startTime + DashTime > Time.time)
         {
+            ParticleSystem.Play();
             Movement.controller.Move(Movement.moveDir * Time.deltaTime * DashDistance);
             yield return null;
         }
         --DashCount;
+        
+        SkinnedMeshRenderer.enabled = true;
     }
 
     private IEnumerator GetDash()

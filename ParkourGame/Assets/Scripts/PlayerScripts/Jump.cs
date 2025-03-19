@@ -11,10 +11,12 @@ public class Jump : MonoBehaviour
     PlayerMovement Movement;
     Animation DoubleJumpAnim;
     Animator PlayerAnimator;
+    ParticleSystem ParticleSystem;
     void Start()
     {
         Movement = GetComponent<PlayerMovement>();
         PlayerAnimator = transform.GetChild(0).GetComponent<Animator>();
+        ParticleSystem = transform.GetChild(2).GetComponent<ParticleSystem>();
     }
 
     void Update()
@@ -56,6 +58,7 @@ public class Jump : MonoBehaviour
             }
             else if (numberOfJumps > 0)
             {
+                ParticleSystem.Play();
                 PlayerAnimator.SetBool("DoubleJump", true);
                 if (PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoubleJump"))
                 {

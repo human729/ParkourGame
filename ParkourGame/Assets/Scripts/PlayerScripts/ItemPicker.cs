@@ -28,5 +28,12 @@ public class ItemPicker : MonoBehaviour
             booster.RemoveBoost();
             booster.Picked(other.gameObject);
         }
+
+        if (other.gameObject.CompareTag("PowerUp"))
+        {
+            booster = GameObject.FindGameObjectWithTag("BoostManager").GetComponent<PowerUp>();
+            booster.AddBoost();
+            booster.Picked(other.gameObject);
+        }
     }
 }
