@@ -180,11 +180,11 @@ public class PlayerMovement : MonoBehaviour
         
 
        
-        if (!GroundedPlayer)
+        if (!GroundedPlayer && PlayerVelocity.y != 0)
         {
             PlayerAnimator.SetBool("isFalling", true);
         }
-        if (GroundedPlayer || PlayerVelocity.y > 0)
+        if (GroundedPlayer)
         {
             PlayerAnimator.SetBool("isFalling", false);
         }

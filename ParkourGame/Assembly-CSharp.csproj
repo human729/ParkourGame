@@ -55,7 +55,7 @@
     <UnityVersion>2022.3.43f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="D:\Visual Studio\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="D:\VB\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="D:\Unity\2022.3.43f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="D:\Unity\2022.3.43f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -438,18 +438,6 @@
     </Reference>
     <Reference Include="UMotionApplication">
       <HintPath>Assets\UMotionEditor\Plugins\Application\UMotionApplication.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>D:\Unity\2022.3.43f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>D:\Unity\2022.3.43f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.GradleProject">
-      <HintPath>D:\Unity\2022.3.43f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -1008,12 +996,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
@@ -1054,21 +1042,21 @@
       <Project>{1556BC66-79E9-DA46-8CF2-7AA0B074547F}</Project>
       <Name>ToonyColorsPro.Demo.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="UMotionSourceEditor.csproj">
-      <Project>{7198B3DF-164A-B99D-A30C-310314B3619C}</Project>
-      <Name>UMotionSourceEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="CFXREditor.csproj">
-      <Project>{974DE4B0-1899-E6AF-757C-37F1AB556FBF}</Project>
-      <Name>CFXREditor</Name>
-    </ProjectReference>
     <ProjectReference Include="CFXRRuntime.csproj">
       <Project>{7D756E66-4BF5-ECCC-8476-1F320A95CA6D}</Project>
       <Name>CFXRRuntime</Name>
     </ProjectReference>
+    <ProjectReference Include="UMotionSourceEditor.csproj">
+      <Project>{7198B3DF-164A-B99D-A30C-310314B3619C}</Project>
+      <Name>UMotionSourceEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="UMotionSourceApplication.csproj">
       <Project>{F8D54A9A-BB64-4699-1E51-B37221B179A4}</Project>
       <Name>UMotionSourceApplication</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXREditor.csproj">
+      <Project>{974DE4B0-1899-E6AF-757C-37F1AB556FBF}</Project>
+      <Name>CFXREditor</Name>
     </ProjectReference>
     <ProjectReference Include="CFXRDemo.csproj">
       <Project>{9A272994-8A02-3492-1CFD-8E2B55A11B12}</Project>

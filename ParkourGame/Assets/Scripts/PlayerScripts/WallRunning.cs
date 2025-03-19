@@ -13,6 +13,7 @@ public class WallRunning : MonoBehaviour
     Animator PlayerAnimator;
     Vector3 JumpDirection;
     Jump Jumping;
+    bool isJumping;
     bool leftWall, rightWall;
     RaycastHit HitRight, HitLeft;
 
@@ -28,15 +29,15 @@ public class WallRunning : MonoBehaviour
     void Update()
     {
         Vector3 WallInput = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized;
-        rightWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out HitRight, 0.55f, WallToRun);
-        leftWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out HitLeft, 0.55f, WallToRun);
+        rightWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out HitRight, 0.75f, WallToRun);
+        leftWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out HitLeft, 0.75f, WallToRun);
         
-        if (rightWall)
+        if (rightWall && !isJumping)
         {
             Movement.GravityValue = 0;
             WallRunInput(WallInput,1);
         }
-        else if (leftWall)
+        else if (leftWall && !isJumping)
         {
             Movement.GravityValue = 0;
             WallRunInput(WallInput,0);
@@ -66,7 +67,7 @@ public class WallRunning : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     EnableGravity();
-                    WallJump();
+                    StartCoroutine(WallJump());
                     return;
                 }
                 transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
@@ -91,22 +92,17 @@ public class WallRunning : MonoBehaviour
         }
     }
 
-    private void WallJump()
+    IEnumerator WallJump()
     {
-        Vector3 JumpDirectionSide = rightWall ? Vector3.right : Vector3.left;
-        Vector3 JumpDirection = transform.up * Jumping.JumpHeight + JumpDirectionSide * 15f;
-        rightWall = Physics.Raycast(transform.position, Vector3.zero, 0f);
-        leftWall = Physics.Raycast(transform.position, Vector3.zero, 0f);
-        print(JumpDirection);
-        controller.Move(JumpDirection.normalized);
+        Vector3 JumpDirectionSide = rightWall ? new Vector3(-Camera.main.transform.right.x, 0,0) : new Vector3(Camera.main.transform.right.x, 0, 0);
+        Movement.PlayerVelocity = transform.up * Jumping.JumpHeight + JumpDirectionSide * 10f;
+        print(Movement.PlayerVelocity);
+        isJumping = true;
+        controller.Move(Movement.PlayerVelocity.normalized);
         PlayerAnimator.SetBool("hasJumped", true);
-        if (JumpDirectionSide == Vector3.right)
-        {
-            PlayerAnimator.SetBool("WallRunRight", false);
-        } else if (JumpDirectionSide == Vector3.left)
-        {
-            PlayerAnimator.SetBool("WallRunLeft", false);
-        }
+        yield return new WaitForSeconds(0.3f);
+        Movement.PlayerVelocity.x = 0;
+        isJumping = false;
     }
     
     private void EnableGravity()

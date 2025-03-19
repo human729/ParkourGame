@@ -32,7 +32,7 @@ public class Jump : MonoBehaviour
 
         if (Movement.GroundedPlayer && Movement.PlayerVelocity.y < 0)
         {
-            print(Movement.GroundedPlayer);
+            //print(Movement.GroundedPlayer);
             doneJumps = 0;
             PlayerAnimator.SetBool("DoubleJump", false);
             PlayerAnimator.SetBool("hasJumped", false);
