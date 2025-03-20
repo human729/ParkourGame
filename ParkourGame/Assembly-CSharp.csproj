@@ -55,45 +55,49 @@
     <UnityVersion>2022.3.43f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="D:\VB\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="D:\Visual Studio\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="D:\Unity\2022.3.43f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="D:\Unity\2022.3.43f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\PlayerScripts\JumpOverObstacle.cs" />
+    <Compile Include="Assets\Scripts\PickableItems\AddBoostItem.cs" />
     <Compile Include="Assets\UI\UIScripts\TextColorChange.cs" />
     <Compile Include="Assets\UI\UIScripts\CameraMenuRotation.cs" />
     <Compile Include="Assets\UI\UIScripts\SettingsScriptableObject.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Jump.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\ItemPicker.cs" />
+    <Compile Include="Assets\_Creepy_Cat\_3D Scifi Kit Starter Kit_HD\_Scripts\Turn_Move.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Dash.cs" />
+    <Compile Include="Assets\Sci-Fi UI\Demo_Assets\scripts\GUI_Demo.cs" />
     <Compile Include="Assets\UI\UIScripts\SoundToggle.cs" />
     <Compile Include="Assets\Scripts\PickableItems\Boost.cs" />
     <Compile Include="Assets\UI\UIScripts\MenuScript.cs" />
     <Compile Include="Assets\Scripts\PickableItems\PowerUp.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
     <Compile Include="Assets\UI\UIScripts\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\PickableItems\DefaultItem.cs" />
     <Compile Include="Assets\Scripts\PickableItems\JumpBoost.cs" />
+    <Compile Include="Assets\Scripts\PickableItems\AddJumpBoostitem.cs" />
+    <Compile Include="Assets\Sci Fi Modular Pack\Scripts\CameraController.cs" />
     <Compile Include="Assets\UI\UIScripts\PlayerUI.cs" />
+    <Compile Include="Assets\Scripts\PickableItems\SpeedBoostItem.cs" />
+    <Compile Include="Assets\Scripts\DeathZone.cs" />
     <Compile Include="Assets\Scripts\PickableItems\SpeedBoost.cs" />
     <Compile Include="Assets\TeKniKo_Free\Power_Ups\Scripts\ObjectBounce.cs" />
+    <Compile Include="Assets\Scripts\SpawnPoint.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\WallRunning.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_SETTINGS.cginc" />
-    <None Include="Assets\UMotionEditor\Shaders\WiresOnly.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR.cginc" />
-    <None Include="Assets\UMotionEditor\Shaders\UnlitLine.shader" />
-    <None Include="Assets\UMotionEditor\Shaders\UnlitDashedLine.shader" />
-    <None Include="Assets\UMotionEditor\Shaders\CameraLit.shader" />
+    <None Include="Assets\_Creepy_Cat\_3D Scifi Kit Starter Kit_HD\_Shaders\GlassTypeB.shader" />
+    <None Include="Assets\_Creepy_Cat\Readme Help Sos Doc.txt" />
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Prefabs\Texts\_Make your own text effect.txt" />
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_PASSES.cginc" />
-    <None Include="Assets\UMotionEditor\Shaders\VertexColorUnlit.shader" />
-    <None Include="Assets\UMotionEditor\Shaders\ColorUnlit.shader" />
+    <None Include="Assets\Sounds\FUTURE_BEEPS_LITE\Read_Me.txt" />
+    <None Include="Assets\VisualX_Studio\Sci-Fi_Loading_Screen_Effects_FREE\VisualX_Sci-Fi Loading Screen Effects_FREE.txt" />
     <None Include="Assets\SkySeries Freebie\Hdri setup.txt" />
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_URP.cginc" />
-    <None Include="Assets\UMotionEditor\Plugins\Application\UMotionApplication.dll" />
-    <None Include="Assets\UMotionEditor\Shaders\ColorUnlitTransparent.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -436,8 +440,16 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UMotionApplication">
-      <HintPath>Assets\UMotionEditor\Plugins\Application\UMotionApplication.dll</HintPath>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>D:\Unity\2022.3.43f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>D:\Unity\2022.3.43f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.GradleProject">
+      <HintPath>D:\Unity\2022.3.43f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -1045,14 +1057,6 @@
     <ProjectReference Include="CFXRRuntime.csproj">
       <Project>{7D756E66-4BF5-ECCC-8476-1F320A95CA6D}</Project>
       <Name>CFXRRuntime</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMotionSourceEditor.csproj">
-      <Project>{7198B3DF-164A-B99D-A30C-310314B3619C}</Project>
-      <Name>UMotionSourceEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMotionSourceApplication.csproj">
-      <Project>{F8D54A9A-BB64-4699-1E51-B37221B179A4}</Project>
-      <Name>UMotionSourceApplication</Name>
     </ProjectReference>
     <ProjectReference Include="CFXREditor.csproj">
       <Project>{974DE4B0-1899-E6AF-757C-37F1AB556FBF}</Project>

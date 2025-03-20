@@ -94,14 +94,15 @@ public class WallRunning : MonoBehaviour
 
     IEnumerator WallJump()
     {
-        Vector3 JumpDirectionSide = rightWall ? new Vector3(-Camera.main.transform.right.x, 0,0) : new Vector3(Camera.main.transform.right.x, 0, 0);
+        Vector3 JumpDirectionSide = rightWall ? new Vector3(-transform.right.x, 0, -transform.right.z) : new Vector3(transform.right.x, 0, transform.right.z);
         Movement.PlayerVelocity = transform.up * Jumping.JumpHeight + JumpDirectionSide * 10f;
         print(Movement.PlayerVelocity);
         isJumping = true;
-        controller.Move(Movement.PlayerVelocity.normalized);
+        controller.Move(Camera.main.transform.right);
         PlayerAnimator.SetBool("hasJumped", true);
         yield return new WaitForSeconds(0.3f);
         Movement.PlayerVelocity.x = 0;
+        Movement.PlayerVelocity.z = 0;
         isJumping = false;
     }
     
