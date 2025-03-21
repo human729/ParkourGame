@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public AudioSource playerSound;
     [Header("Movement")]
     public float MoveSpeed;
     float horizontalInput;
@@ -130,6 +131,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (InputVector.magnitude >= 0.1f)
         {
+            if (!playerSound.isPlaying)
+            {
+                playerSound.Play();
+            }
             if (!isSpeedIncreased && MoveSpeed == StartSpeed)
             {
                 isSpeedIncreased = true;
@@ -145,7 +150,9 @@ public class PlayerMovement : MonoBehaviour
             moveDir = Quaternion.Euler(0, angle, 0) * new Vector3(0, 0, 1);
 
             controller.Move(moveDir.normalized * MoveSpeed * Time.deltaTime);
+
             
+
             //if (MoveSpeed > 8f && MoveSpeed < 20f)
             //{
             //    AnimFloat = 0.67f;
@@ -161,9 +168,12 @@ public class PlayerMovement : MonoBehaviour
             //    AnimFloat = Mathf.Lerp(AnimFloat, 1, 1.1f);
             //    PlayerAnimator.SetFloat("move", AnimFloat);
             //}
+        } else
+        {
+            playerSound.Stop();
         }
 
-        
+
 
         if (InputVector.magnitude < 0.1f)
         {
@@ -182,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
        
         if (!GroundedPlayer && PlayerVelocity.y != 0)
         {
+            playerSound.Stop();
             PlayerAnimator.SetBool("isFalling", true);
         }
         if (GroundedPlayer)
@@ -197,8 +208,6 @@ public class PlayerMovement : MonoBehaviour
         //print(AnimFloat);
     }
 
-
-
     IEnumerator Sprint(Vector3 InputVector)
     {
         for (int i = 0; i < 2; i++)
@@ -206,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
             if (MoveSpeed == MaxSpeed || InputVector.magnitude < 0.1f) 
             {
                 yield break;
-            } 
+            }
             yield return new WaitForSeconds(2f);
             MoveSpeed += 4;
             SpeedToShow += 40;

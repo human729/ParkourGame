@@ -49,7 +49,6 @@ public class Dash : MonoBehaviour
             yield return null;
         }
         --DashCount;
-        
         SkinnedMeshRenderer.enabled = true;
     }
 
