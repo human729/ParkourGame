@@ -81,7 +81,7 @@ MonoBehaviour:
   MoveSpeed: 4
   PlayerVelocity: {x: 0, y: 0, z: 0}
   controller: {fileID: 1021813271864613004}
-  GravityValue: -15
+  GravityValue: -7.64
   GroundedPlayer: 0
   moveDir: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -101,7 +101,7 @@ MonoBehaviour:
   DashTime: 0.18
   DashCount: 0
   MaxDashCount: 2
-  DashDistance: 30
+  DashDistance: 52.9
   DashReturn: 0
 --- !u!114 &2408711581455477150
 MonoBehaviour:
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491c089cb711d1e4f8323f9e8b1daf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumps: 4
+  maxJumps: 3
   doneJumps: 0
   JumpHeight: 3
 --- !u!1 &5567545910687414648
@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4022499318204204334}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: LookAtTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,7 @@ PrefabInstance:
     - target: {fileID: -2717395650310496025, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f560c6b24811247ca966b15a6ada8a14, type: 2}
+      objectReference: {fileID: 2100000, guid: 69cd0d446d7ed6d4da31d44867765491, type: 2}
     - target: {fileID: 919132149155446097, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       propertyPath: m_Name
       value: Human_DummyModel_M
