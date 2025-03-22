@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     bool isSpeedIncreased;
     private float MaxSpeed = 24f;
     public float SpeedToShow = 0f;
+    private float CurrentTime;
+    public float TimeForStep;
 
 
     //public CharacterMovement characterMovement = new CharacterMovement(new Staying());
@@ -131,10 +133,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (InputVector.magnitude >= 0.1f)
         {
-            if (!playerSound.isPlaying)
-            {
-                playerSound.Play();
-            }
+            PlayStepSound();
+            //if (!playerSound.isPlaying)
+            //{
+            //    playerSound.Play();
+            //}
             if (!isSpeedIncreased && MoveSpeed == StartSpeed)
             {
                 isSpeedIncreased = true;
@@ -168,9 +171,6 @@ public class PlayerMovement : MonoBehaviour
             //    AnimFloat = Mathf.Lerp(AnimFloat, 1, 1.1f);
             //    PlayerAnimator.SetFloat("move", AnimFloat);
             //}
-        } else
-        {
-            playerSound.Stop();
         }
 
 
@@ -183,13 +183,9 @@ public class PlayerMovement : MonoBehaviour
             AnimFloat = 0;
             PlayerAnimator.SetFloat("move", AnimFloat);
             SpeedToShow = 0;
+            TimeForStep = 0.57f;
         }
-        
 
-
-        
-
-       
         if (!GroundedPlayer && PlayerVelocity.y != 0)
         {
             playerSound.Stop();
@@ -208,6 +204,25 @@ public class PlayerMovement : MonoBehaviour
         //print(AnimFloat);
     }
 
+    void PlayStepSound()
+    {
+        if (Mathf.Abs(verticalInput) > 0 || Mathf.Abs(horizontalInput) > 0) // если персонаж движется
+        {
+            print("Step sound");
+            CurrentTime += Time.deltaTime;
+
+            if (CurrentTime > TimeForStep)
+            {
+                CurrentTime = 0;
+                playerSound.PlayOneShot(playerSound.clip);
+            }
+        }
+        else
+        {
+            CurrentTime = 1000;
+        }
+    }
+
     IEnumerator Sprint(Vector3 InputVector)
     {
         for (int i = 0; i < 2; i++)
@@ -218,6 +233,7 @@ public class PlayerMovement : MonoBehaviour
             }
             yield return new WaitForSeconds(2f);
             MoveSpeed += 4;
+            TimeForStep -= 0.12f;
             SpeedToShow += 40;
             AnimFloat = i+2;
             PlayerAnimator.SetFloat("move", AnimFloat);
