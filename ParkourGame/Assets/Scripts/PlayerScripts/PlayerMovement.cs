@@ -1,9 +1,11 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
@@ -20,10 +22,11 @@ public class PlayerMovement : MonoBehaviour
     public bool GroundedPlayer;
     public Vector3 moveDir;
     public Quaternion rotation;
-    //public float DashTime;
-    //public float DashDistance;
+    float TargetFov = 72f;
     Animator PlayerAnimator;
+    public CinemachineFreeLook FreeLookCamera;
     float AnimFloat;
+    float TargetAnim;
     private bool isWalkableWall;
     float StartSpeed;
     bool isSpeedIncreased;
@@ -116,11 +119,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        AnimFloat = 0;
+        TargetAnim = 0;
         controller = GetComponent<CharacterController>();
         PlayerAnimator = transform.GetChild(0).GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         StartSpeed = MoveSpeed;
+        FreeLookCamera = GameObject.FindGameObjectWithTag("CameraFreeLook").GetComponent<CinemachineFreeLook>();
     }
 
     void Update()
@@ -134,15 +138,11 @@ public class PlayerMovement : MonoBehaviour
         if (InputVector.magnitude >= 0.1f)
         {
             PlayStepSound();
-            //if (!playerSound.isPlaying)
-            //{
-            //    playerSound.Play();
-            //}
+            
             if (!isSpeedIncreased && MoveSpeed == StartSpeed)
             {
                 isSpeedIncreased = true;
-                AnimFloat = 1;
-                PlayerAnimator.SetFloat("move", AnimFloat);
+                TargetAnim = 1;
                 StartCoroutine(Sprint(InputVector));
             }
 
@@ -154,33 +154,28 @@ public class PlayerMovement : MonoBehaviour
 
             controller.Move(moveDir.normalized * MoveSpeed * Time.deltaTime);
 
-            
 
-            //if (MoveSpeed > 8f && MoveSpeed < 20f)
-            //{
-            //    AnimFloat = 0.67f;
-            //    PlayerAnimator.SetFloat("move", AnimFloat);
-            //}
-            //if (MoveSpeed <= 8f)
-            //{
-            //AnimFloat = Mathf.Lerp(AnimFloat, 1, 0.2f);
-            //PlayerAnimator.SetFloat("move", AnimFloat);
-            //}
-            //if (MoveSpeed <= MaxSpeed && MoveSpeed >= 20f)
-            //{
-            //    AnimFloat = Mathf.Lerp(AnimFloat, 1, 1.1f);
-            //    PlayerAnimator.SetFloat("move", AnimFloat);
-            //}
+            
         }
 
+        
+        FreeLookCamera.m_Lens.FieldOfView = Mathf.Lerp(FreeLookCamera.m_Lens.FieldOfView, TargetFov, 0.01f);
+        print(FreeLookCamera.m_Lens.FieldOfView);
+        AnimFloat = Mathf.Lerp(AnimFloat, TargetAnim, 0.04f);
+        PlayerAnimator.SetFloat("move", AnimFloat);
 
+        if (MathF.Round(AnimFloat, 3) <= 0.001f)
+        {
+            AnimFloat = 0;
+        }
 
         if (InputVector.magnitude < 0.1f)
         {
             StopAllCoroutines();
             MoveSpeed = StartSpeed;
             isSpeedIncreased = false;
-            AnimFloat = 0;
+            TargetAnim = 0;
+            TargetFov = 72;
             PlayerAnimator.SetFloat("move", AnimFloat);
             SpeedToShow = 0;
             TimeForStep = 0.57f;
@@ -233,9 +228,10 @@ public class PlayerMovement : MonoBehaviour
             }
             yield return new WaitForSeconds(2f);
             MoveSpeed += 4;
+            TargetFov += 20;
             TimeForStep -= 0.12f;
             SpeedToShow += 40;
-            AnimFloat = i+2;
+            TargetAnim = i+2;
             PlayerAnimator.SetFloat("move", AnimFloat);
             print("AddingSpeed");
         }

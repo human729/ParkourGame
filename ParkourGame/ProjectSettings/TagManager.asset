@@ -12,6 +12,7 @@ TagManager:
   - FxTemporaire
   - PowerUp
   - JumpObstacle
+  - CameraFreeLook
   layers:
   - Default
   - TransparentFX

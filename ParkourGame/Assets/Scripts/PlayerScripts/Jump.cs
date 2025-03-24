@@ -8,13 +8,12 @@ public class Jump : MonoBehaviour
     public int maxJumps;
     public int doneJumps = 0;
     public float JumpHeight;
-    PlayerMovement Movement;
+    public PlayerMovement Movement;
     Animation DoubleJumpAnim;
     Animator PlayerAnimator;
     ParticleSystem ParticleSystem;
     void Start()
     {
-        Movement = GetComponent<PlayerMovement>();
         PlayerAnimator = transform.GetChild(0).GetComponent<Animator>();
         ParticleSystem = transform.GetChild(2).GetComponent<ParticleSystem>();
     }

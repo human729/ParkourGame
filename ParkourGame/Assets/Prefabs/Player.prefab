@@ -66,7 +66,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.96, z: 0}
 --- !u!114 &6144032093513654798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,11 +83,13 @@ MonoBehaviour:
   MoveSpeed: 4
   PlayerVelocity: {x: 0, y: 0, z: 0}
   controller: {fileID: 1021813271864613004}
-  GravityValue: -7.64
+  GravityValue: -15
   GroundedPlayer: 0
   moveDir: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 0}
+  FreeLookCamera: {fileID: 0}
   SpeedToShow: 0
+  TimeForStep: 0.57
 --- !u!114 &649786349156923881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +137,7 @@ MonoBehaviour:
   maxJumps: 3
   doneJumps: 0
   JumpHeight: 3
+  Movement: {fileID: 6144032093513654798}
 --- !u!1 &82211821202492348
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +180,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3714674745118406413, guid: c7694a08ba524e34c9bfe96fc0accc07, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 0e5fb5bc87022be449710c704893b8e9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 343b10e8c454ac641bd93a15c082f31f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -288,7 +291,7 @@ Transform:
   m_GameObject: {fileID: 5567545910687414648}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.136, z: 0}
+  m_LocalPosition: {x: 0, y: 1.429, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -357,7 +360,7 @@ PrefabInstance:
     - target: {fileID: -2717395650310496025, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 69cd0d446d7ed6d4da31d44867765491, type: 2}
+      objectReference: {fileID: 2100000, guid: 78028ba30e3986b41a9cabc5ca350721, type: 2}
     - target: {fileID: 919132149155446097, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       propertyPath: m_Name
       value: Human_DummyModel_M
