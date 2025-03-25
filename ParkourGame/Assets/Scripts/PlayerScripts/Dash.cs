@@ -9,8 +9,8 @@ public class Dash : MonoBehaviour
 {
     PlayerMovement Movement;
     public float DashTime;
-    public int DashCount;
-    public int MaxDashCount;
+    public static int DashCount;
+    public static int MaxDashCount = 2;
     public float DashDistance;
     public bool DashReturn;
     SkinnedMeshRenderer SkinnedMeshRenderer;

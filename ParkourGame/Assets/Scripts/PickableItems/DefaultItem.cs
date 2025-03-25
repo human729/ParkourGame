@@ -7,7 +7,8 @@ public abstract class DefaultItem : MonoBehaviour
     public abstract void ItemBehaviour(GameObject Player);    
     public void Picked()
     {
-        Destroy(gameObject);
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+        gameObject.transform.GetComponent<BoxCollider>().enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)

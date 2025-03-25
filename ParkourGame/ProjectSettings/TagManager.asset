@@ -13,6 +13,7 @@ TagManager:
   - PowerUp
   - JumpObstacle
   - CameraFreeLook
+  - LvLFinished
   layers:
   - Default
   - TransparentFX

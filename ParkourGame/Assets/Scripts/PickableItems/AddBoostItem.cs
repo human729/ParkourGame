@@ -6,9 +6,8 @@ public class AddBoostItem : DefaultItem
 {
     public override void ItemBehaviour(GameObject Player)
     {
-        Dash dash = Player.GetComponent<Dash>();
-        dash.DashCount++;
-        dash.MaxDashCount++;
-        Picked();
+        Dash.MaxDashCount++;
+        Dash.DashCount++;
+        Destroy(gameObject);
     }
 }

@@ -14,8 +14,8 @@ public class AddJumpBoostitem : DefaultItem
 
     private IEnumerator RemoveBoost()
     {
-        gameObject.GetComponent<AddJumpBoostitem>().enabled = false;
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(5f);
         jump.JumpHeight -= 4.7f;
         Picked();

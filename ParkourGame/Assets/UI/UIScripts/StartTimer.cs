@@ -49,6 +49,7 @@ public class StartTimer : MonoBehaviour
         yield return new WaitForSeconds(1f);
         StartGameTimer.enabled = false;
         Movement.enabled = true;
+        WallRunning.enabled = true;
         Dash.enabled = true;
         Jump.enabled = true;
         UI.SetActive(true);

@@ -14,8 +14,8 @@ public class SpeedBoostItem : DefaultItem
 
     private IEnumerator RemoveBoost()
     {
-        gameObject.GetComponent<SpeedBoostItem>().enabled = false;
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(5f);
         playerMovement.MoveSpeed -= 10f;
         Picked();

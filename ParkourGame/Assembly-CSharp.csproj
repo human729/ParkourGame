@@ -67,7 +67,6 @@
     <Compile Include="Assets\UI\UIScripts\SettingsScriptableObject.cs" />
     <Compile Include="Assets\UI\UIScripts\Timer.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Jump.cs" />
-    <Compile Include="Assets\Scripts\PlayerScripts\ItemPicker.cs" />
     <Compile Include="Assets\_Creepy_Cat\_3D Scifi Kit Starter Kit_HD\_Scripts\Turn_Move.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Dash.cs" />
     <Compile Include="Assets\Sci-Fi UI\Demo_Assets\scripts\GUI_Demo.cs" />
@@ -76,7 +75,6 @@
     <Compile Include="Assets\Scripts\PickableItems\Boost.cs" />
     <Compile Include="Assets\UI\UIScripts\MenuScript.cs" />
     <Compile Include="Assets\UI\UIScripts\StartTimer.cs" />
-    <Compile Include="Assets\Scripts\PickableItems\PowerUp.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
     <Compile Include="Assets\UI\UIScripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\PickableItems\DefaultItem.cs" />
@@ -86,6 +84,7 @@
     <Compile Include="Assets\Scripts\Triggers\NextLevel.cs" />
     <Compile Include="Assets\UI\UIScripts\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\PickableItems\SpeedBoostItem.cs" />
+    <Compile Include="Assets\UI\UIScripts\EndScreen.cs" />
     <Compile Include="Assets\Scripts\DeathZone.cs" />
     <Compile Include="Assets\Scripts\PickableItems\SpeedBoost.cs" />
     <Compile Include="Assets\TeKniKo_Free\Power_Ups\Scripts\ObjectBounce.cs" />

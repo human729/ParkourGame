@@ -34,7 +34,6 @@ public class DeathZone : MonoBehaviour
         camera.GetComponent<CinemachineFreeLook>().Follow = NewCreatedPlayer.transform.GetChild(3).transform;
 
         PUI.MovementScript = NewCreatedPlayer.transform.GetComponent<PlayerMovement>();
-        PUI.dash = NewCreatedPlayer.transform.GetComponent<Dash>();
         PUI.jump = NewCreatedPlayer.transform.GetComponent<Jump>();
     }
 }

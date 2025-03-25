@@ -29,8 +29,8 @@ public class WallRunning : MonoBehaviour
     void Update()
     {
         Vector3 WallInput = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized;
-        rightWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out HitRight, 0.75f, WallToRun);
-        leftWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out HitLeft, 1f, WallToRun);
+        rightWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out HitRight, 1.1f, WallToRun);
+        leftWall = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out HitLeft, 1.1f, WallToRun);
         
         if (rightWall && !isJumping)
         {
