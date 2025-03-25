@@ -109,7 +109,7 @@ public class WallRunning : MonoBehaviour
     private void EnableGravity()
     {
         Movement.enabled = true;
-        Movement.GravityValue = -15;
+        Movement.GravityValue = -15f;
         PlayerAnimator.SetBool("WallRunLeft", false);
         PlayerAnimator.SetBool("WallRunRight", false);
     }

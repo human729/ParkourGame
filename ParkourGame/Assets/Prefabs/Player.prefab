@@ -103,8 +103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DashTime: 0.18
-  DashCount: 0
-  MaxDashCount: 2
   DashDistance: 52.9
   DashReturn: 0
 --- !u!114 &2408711581455477150
@@ -360,7 +358,7 @@ PrefabInstance:
     - target: {fileID: -2717395650310496025, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 78028ba30e3986b41a9cabc5ca350721, type: 2}
+      objectReference: {fileID: 2100000, guid: dda947eb1d519f546bd4cd8540c9dab2, type: 2}
     - target: {fileID: 919132149155446097, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       propertyPath: m_Name
       value: Human_DummyModel_M

@@ -29,7 +29,7 @@ public class Jump : MonoBehaviour
 
         //print(Movement.PlayerVelocity.y);
 
-        if (Movement.GroundedPlayer && Movement.PlayerVelocity.y < 0)
+        if (Movement.GroundedPlayer && Movement.PlayerVelocity.y < 0 && !PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoubleJump"))
         {
             //print(Movement.GroundedPlayer);
             doneJumps = 0;
@@ -37,7 +37,7 @@ public class Jump : MonoBehaviour
             PlayerAnimator.SetBool("hasJumped", false);
         }
 
-        if (!Movement.GroundedPlayer && Movement.PlayerVelocity.y <= 0)
+        if (!Movement.GroundedPlayer && Movement.PlayerVelocity.y <= 0 )
         {
             PlayerAnimator.SetBool("DoubleJump", false);
             PlayerAnimator.SetBool("hasJumped", false);
