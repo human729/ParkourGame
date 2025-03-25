@@ -8,7 +8,7 @@ public class AddJumpBoostitem : DefaultItem
     public override void ItemBehaviour(GameObject Player)
     {
         jump = Player.GetComponent<Jump>();
-        jump.JumpHeight += 4.7f;
+        jump.JumpHeight += 5.5f;
         StartCoroutine(RemoveBoost());
     }
 
@@ -17,7 +17,7 @@ public class AddJumpBoostitem : DefaultItem
         gameObject.GetComponent<BoxCollider>().enabled = false;
         gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(5f);
-        jump.JumpHeight -= 4.7f;
+        jump.JumpHeight -= 5.5f;
         Picked();
     }
 }

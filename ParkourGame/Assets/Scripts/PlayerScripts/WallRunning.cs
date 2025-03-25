@@ -95,7 +95,7 @@ public class WallRunning : MonoBehaviour
     IEnumerator WallJump()
     {
         Vector3 JumpDirectionSide = rightWall ? new Vector3(-transform.right.x, 0, -transform.right.z) : new Vector3(transform.right.x, 0, transform.right.z);
-        Movement.PlayerVelocity = transform.up * Jumping.JumpHeight + JumpDirectionSide * 10f;
+        Movement.PlayerVelocity = transform.up * Jumping.JumpHeight + JumpDirectionSide * 40f;
         print(Movement.PlayerVelocity);
         isJumping = true;
         controller.Move(Camera.main.transform.right);
