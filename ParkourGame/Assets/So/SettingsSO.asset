@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SettingsSO
   m_EditorClassIdentifier: 
   SoundToggle: 1
-  MusicValue: 0
+  MusicValue: -19.928473
   SoundValue: 0

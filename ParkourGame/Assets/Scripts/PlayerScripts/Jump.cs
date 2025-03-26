@@ -9,6 +9,7 @@ public class Jump : MonoBehaviour
     public int doneJumps = 0;
     public float JumpHeight;
     public PlayerMovement Movement;
+    public WallRunning WallRun;
     Animation DoubleJumpAnim;
     Animator PlayerAnimator;
     ParticleSystem ParticleSystem;
@@ -21,7 +22,7 @@ public class Jump : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&& !WallRun.isWallRunnning)
         {
             PlayerAnimator.SetBool("DoubleJump", false);
             DoubleJump(ref doneJumps);

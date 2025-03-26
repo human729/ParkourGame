@@ -54,5 +54,6 @@ public class StartTimer : MonoBehaviour
         Jump.enabled = true;
         UI.SetActive(true);
         PlayerTimer.enabled = true;
+        gameObject.SetActive(false);
     }
 }

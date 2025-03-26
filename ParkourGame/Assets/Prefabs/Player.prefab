@@ -120,6 +120,7 @@ MonoBehaviour:
   WallToRun:
     serializedVersion: 2
     m_Bits: 256
+  isWallRunnning: 0
 --- !u!114 &653864188747619380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +137,7 @@ MonoBehaviour:
   doneJumps: 0
   JumpHeight: 3
   Movement: {fileID: 6144032093513654798}
+  WallRun: {fileID: 2408711581455477150}
 --- !u!1 &82211821202492348
 GameObject:
   m_ObjectHideFlags: 0

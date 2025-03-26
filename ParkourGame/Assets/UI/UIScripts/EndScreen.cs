@@ -14,7 +14,10 @@ public class EndScreen : MonoBehaviour
     void Start()
     {
         TimeText = transform.GetChild(3).GetComponent<Text>();
+        Camera.main.GetComponent<Pause>().enabled = false;
         Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        Time.timeScale = 0;
         TimeText.text = timer.textForCanvas;
         PlayerUI.SetActive(false);
         Player.SetActive(false);

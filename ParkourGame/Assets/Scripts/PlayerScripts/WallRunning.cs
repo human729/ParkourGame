@@ -15,6 +15,7 @@ public class WallRunning : MonoBehaviour
     Jump Jumping;
     bool isJumping;
     bool leftWall, rightWall;
+    public bool isWallRunnning;
     RaycastHit HitRight, HitLeft;
 
     void Start()
@@ -45,6 +46,7 @@ public class WallRunning : MonoBehaviour
         else
         {
             EnableGravity();
+            isWallRunnning = false;
             //print("sdsd");
         }
     }
@@ -53,6 +55,7 @@ public class WallRunning : MonoBehaviour
     {
         if (WallInput.magnitude >= 0.1f)
         {
+            isWallRunnning=true;
             Movement.enabled = false;
             //float targetAngle = Mathf.Atan2(WallInput.x, WallInput.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
             //float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, 0.1f);
