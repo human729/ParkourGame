@@ -18,6 +18,7 @@ public class Dash : MonoBehaviour
 
     private void Awake()
     {
+        MaxDashCount = 2;
         DashCount = MaxDashCount;
     }
     void Start()
@@ -25,6 +26,7 @@ public class Dash : MonoBehaviour
         ParticleSystem = transform.GetChild(1).GetComponent<ParticleSystem>();
         SkinnedMeshRenderer = transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>();
         Movement = GetComponent<PlayerMovement>();
+        
         StartCoroutine(GetDash());
     }
 
@@ -55,8 +57,6 @@ public class Dash : MonoBehaviour
     private IEnumerator GetDash()
     {
 
-        //for (int i = DashCount; i < MaxDashCount; ++i)
-        //{
         while (true)
         {
             if (DashCount < MaxDashCount)
@@ -70,6 +70,5 @@ public class Dash : MonoBehaviour
         }
     }
 
-    //}
 }
 

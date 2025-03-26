@@ -17,6 +17,7 @@ public class Jump : MonoBehaviour
     {
         PlayerAnimator = transform.GetChild(0).GetComponent<Animator>();
         ParticleSystem = transform.GetChild(2).GetComponent<ParticleSystem>();
+        maxJumps = 3;
     }
 
     void Update()
