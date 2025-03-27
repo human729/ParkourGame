@@ -7,7 +7,8 @@ public class AddBoostItem : DefaultItem
     public override void ItemBehaviour(GameObject Player)
     {
         Dash.MaxDashCount++;
-        Dash.DashCount++;
-        Destroy(gameObject);
+        Dash.DashCount = Dash.MaxDashCount;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
 }

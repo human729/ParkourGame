@@ -39,4 +39,9 @@ public class Pause : MonoBehaviour
             PlayerUI.SetActive(!PlayerUI.activeInHierarchy);
         }
     }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }

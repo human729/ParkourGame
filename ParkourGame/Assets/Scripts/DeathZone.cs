@@ -2,18 +2,20 @@ using Cinemachine;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
     public GameObject NewPlayer;
     GameObject SpawnPoint;
+    List<GameObject> DashBoosts;
     PlayerUI PUI;
     public GameObject camera;
     private void Start()
     {
         //Player = GameObject.FindGameObjectWithTag("Player");
-
+        DashBoosts = GameObject.FindGameObjectsWithTag("PowerUp").ToList();
         SpawnPoint = GameObject.Find("SpawnPoint");
     }
     private void OnTriggerEnter(Collider other)
@@ -22,6 +24,11 @@ public class DeathZone : MonoBehaviour
         {
             Destroy(other.gameObject);
             StartCoroutine(WaitSpawn());
+            foreach (GameObject DashBoost in DashBoosts)
+            {
+                DashBoost.GetComponent<Collider>().enabled = true;
+                DashBoost.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+            }
         }
     }
 
