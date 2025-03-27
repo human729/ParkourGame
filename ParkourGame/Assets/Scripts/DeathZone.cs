@@ -8,6 +8,7 @@ using UnityEngine;
 public class DeathZone : MonoBehaviour
 {
     public GameObject NewPlayer;
+    AudioSource DeathSound;
     GameObject SpawnPoint;
     List<GameObject> DashBoosts;
     PlayerUI PUI;
@@ -17,12 +18,14 @@ public class DeathZone : MonoBehaviour
         //Player = GameObject.FindGameObjectWithTag("Player");
         DashBoosts = GameObject.FindGameObjectsWithTag("PowerUp").ToList();
         SpawnPoint = GameObject.Find("SpawnPoint");
+        DeathSound = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             Destroy(other.gameObject);
+            DeathSound.Play();
             StartCoroutine(WaitSpawn());
             foreach (GameObject DashBoost in DashBoosts)
             {

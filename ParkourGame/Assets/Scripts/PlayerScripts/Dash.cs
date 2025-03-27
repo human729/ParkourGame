@@ -11,6 +11,7 @@ public class Dash : MonoBehaviour
     public float DashTime;
     public static int DashCount;
     public static int MaxDashCount = 2;
+    public AudioSource DashSound;
     public float DashDistance;
     public bool DashReturn;
     SkinnedMeshRenderer SkinnedMeshRenderer;
@@ -36,6 +37,7 @@ public class Dash : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && DashCount <= MaxDashCount && DashCount > 0)
         {
             //DashReturn = false;
+            DashSound.Play();
             StartCoroutine(Dashing());
         }
     }

@@ -10,7 +10,7 @@ public class Jump : MonoBehaviour
     public float JumpHeight;
     public PlayerMovement Movement;
     public WallRunning WallRun;
-    Animation DoubleJumpAnim;
+    public AudioSource JumpSound;
     Animator PlayerAnimator;
     ParticleSystem ParticleSystem;
     void Start()
@@ -51,6 +51,7 @@ public class Jump : MonoBehaviour
         if (numberOfJumps < maxJumps - 1)
         {
             Movement.PlayerVelocity.y = Mathf.Sqrt(JumpHeight * -2 * Movement.GravityValue);
+            JumpSound.Play();
             if (numberOfJumps == 0)
             {
                 PlayerAnimator.SetBool("hasJumped", true);
